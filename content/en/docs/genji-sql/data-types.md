@@ -14,33 +14,29 @@ There are basically two kinds of data types:
 
 ## Fixed size data types
 
-| Name    | Description                     | From                     | To                      |
-| ------ | ------------------------------ | ----------------------- | ---------------------- |
-| int8    | 1 byte signed integer           | -128                     | 127                     |
-| int16   | 2 bytes signed integer          | -32768                   | 32767                   |
-| int32   | 4 bytes signed integer          | -2147483648              | 2147483647              |
-| int64   | 8 bytes signed integer          | -9223372036854775808     | 9223372036854775807     |
-| float64 | 8 bytes decimal                 | -1.7976931348623157e+308 | 1.7976931348623157e+308 |
-| bool    | Can be either `true` or `false` | `false` | `true` |
+| Name   | Description                     | From                     | To                      |
+| ------ | ------------------------------- | ------------------------ | ----------------------- |
+| BOOL   | Can be either `true` or `false` | `false`                  | `true`                  |
+| DOUBLE | 8 bytes decimal                 | -1.7976931348623157e+308 | 1.7976931348623157e+308 |
 
 ## Variable size data types
 
-| Name | Description |
-| --- | --- |
-| int | Signed integer which takes 1, 2, 4 or 8 bytes depending on the size of the stored number |
-| integer | Alias for `int` |
-| duration | Represents a length of time in nanoseconds. Stored as an integer |
-| blob | Variable size blob of data |
-| text | Variable size UTF-8 encoded string |
-| array | Array of values of any type |
-| document | Object that contains pairs that associate a string field to a value of any type |
+| Name     | Description                                                                              |
+| -------- | ---------------------------------------------------------------------------------------- |
+| INTEGER  | Signed integer which takes 1, 2, 4 or 8 bytes depending on the size of the stored number |
+| INT      | Alias for `INTEGER`                                                                      |
+| DURATION | Represents a length of time in nanoseconds. Stored as an INTEGER                         |
+| BLOB     | Variable size BLOB of data                                                               |
+| TEXT     | Variable size UTF-8 encoded string                                                       |
+| ARRAY    | ARRAY of values of any type                                                              |
+| DOCUMENT | Object that contains pairs that associate a string field to a value of any type          |
 
 ## The case of NULL
 
-In Genji, *Null* is treated as both a value and a type. It represents the absence of data, and is returned in various cases:
+In Genji, *NULL* is treated as both a value and a type. It represents the absence of data, and is returned in various cases:
 
 * when selecting a field that doesn't exists
-* when selecting a field whose value is null
+* when selecting a field whose value is NULL
 * as the result of the evaluation of an expression
 
 ## Conversion
@@ -56,32 +52,30 @@ Explicit conversion is used when we want to convert a value of a *source* type i
 However, Genji types are not all compatible with one another, and when a user tries to convert them, Genji returns an error.
 Here is a table describing type compatibility.
 
-| Source type | Target type | Converted                                      |
-| ---------- | --------------- | --------------------------------------------- |
-| any integer | float64          | yes                                            |
-| any integer | text           | no                                             |
-| any integer | blob            | no                                             |
-| any integer | bool             | yes, `false` if zero, otherwise `true` |
-| float64     | any integer      | yes, if not lossy                              |
-| float64     | text           | no                                             |
-| float64     | blob            | no                                             |
-| float64     | bool             | yes, `false` if zero, otherwise `true` |
-| text      | any integer      | no                                             |
-| text      | float64          | no                                             |
-| text      | blob            | yes                                            |
-| text      | bool             | yes, `false` if empty string, otherwise `true` |
-| blob       | any integer      | no                                             |
-| blob       | float64          | no                                             |
-| blob       | text           | yes                                            |
-| blob       | bool             | yes, `false` if empty, otherwise `true` |
-| bool        | any integer      | yes                                            |
-| bool        | float64          | yes                                            |
-| bool        | text           | no                                             |
-| bool        | blob            | no                                             |
-| null | any type | yes, the zero value of the type |
-
-Arrays and documents cannot be converted to any other values.
+| Source type | Target type | Converted                                         | Example                                    |
+| ----------- | ----------- | ------------------------------------------------- | ------------------------------------------ |
+| BOOL        | INTEGER     | yes, `1` if `true`, otherwise `0`                 | `CAST(true AS INTEGER)   -> 1`             |
+| BOOL        | TEXT        | yes, `'true'` if `true`, otherwise `'false'`      | `CAST(true AS TEXT)   -> 'true'`           |
+| INTEGER     | BOOL        | yes, `false` if zero, otherwise `true`            | `CAST(10 AS BOOL)   -> true`               |
+| INTEGER     | DOUBLE      | yes                                               | `CAST(10 AS DOUBLE) -> 10.0`               |
+| INTEGER     | TEXT        | yes                                               | `CAST(10 AS TEXT)   -> '10'`               |
+| DOUBLE      | INTEGER     | yes, cuts off the decimal part                    | `CAST(10.5 AS DOUBLE) -> 10`               |
+| DOUBLE      | TEXT        | yes                                               | `CAST(10.5 AS DOUBLE) -> '10.5'`           |
+| DURATION    | INTEGER     | yes                                               | `CAST(1ms AS INTEGER) -> 1000000`          |
+| DURATION    | TEXT        | yes                                               | `CAST(1ms AS TEXT) -> '1ms'`               |
+| TEXT        | BOOL        | yes, if the content is a valid boolean            | `CAST('true' AS BOOL) -> true`             |
+| TEXT        | INTEGER     | yes, if the content is a valid integer            | `CAST('10' AS INTEGER) -> 10`              |
+| TEXT        | DOUBLE      | yes, if the content is a valid decimal number     | `CAST('10.4' AS DOUBLE) -> 10.4`           |
+| TEXT        | DURATION    | yes, if the content is a valid duration           | `CAST('1ms' AS DURATION) -> '1ms'`         |
+| TEXT        | BLOB        | yes, if the content is a valid base64 value       | `CAST('aGVsbG8K' AS BLOB) -> 'aGVsbG8K'`   |
+| TEXT        | ARRAY       | yes, if the content is a valid json array         | `CAST('[1, 2, 3]' AS ARRAY) -> [1, 2, 3]`  |
+| TEXT        | DOCUMENT    | yes, if the content is a valid json object        | `CAST('{"a": 1}' AS DOCUMENT) -> {"a": 1}` |
+| BLOB        | TEXT        | yes, the content will be encoded in base64        |                                            |
+| ARRAY       | TEXT        | yes, the content will be encoded as a json array  | `CAST([1, 2, 3] AS TEXT) -> '[1, 2, 3]'`   |
+| DOCUMENT    | TEXT        | yes, the content will be encoded as a json object | `CAST({a: 1} AS DOUBLE) -> '{"a": 1}'`     |
+| NULL        | any type    | yes, `NULL`                                       | `CAST(NULL AS DOUBLE) -> NULL`             |
 
 ### Implicit conversion
 
-Implicit conversion usually takes place during the evaluation of an [expression]({{< relref "/docs/genji-sql/expressions" >}}). Different rules may apply depending on the expression kind. Comparing values, evaluating literals, using arithmetic operators, all have their own set of implicit conversion rules.
+There is only one kind of implicit conversion: `INTEGER` to `DOUBLE`. This usually takes place during the evaluation of an [expression]({{< relref "/docs/genji-sql/expressions" >}}) involving INTEGER and DOUBLE values.
+No other conversion is applied unless it's explicit.

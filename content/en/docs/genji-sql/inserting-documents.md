@@ -81,7 +81,7 @@ Now, let's consider having the following table:
 CREATE TABLE users (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
-    age INT8
+    age INTEGER
 )
 ```
 
@@ -89,7 +89,7 @@ Only documents satisfying the following field constraints can be inserted in the
 
 - the document must have a non-null `id` field. It must be convertible to an `INTEGER`. Since this field will be used as the primary key of the table, each `id` must be unique.
 - the document must have a non-null `name` field. It must be convertible to a `TEXT`.
-- the document may have an `age` field. If it exists, it must be convertible to an `INT8`.
+- the document may have an `age` field. If it exists, it must be convertible to an `INTEGER`.
 - the document may have any other fields.
 
 The conversion compatible table can be found in the [data types]({{< relref "/docs/genji-sql/data-types" >}}#explicit-conversion) page.
@@ -108,28 +108,6 @@ Error:
 Let's add an `id`:
 
 ```sql
-INSERT INTO users (id, first_name, alias) VALUES ("some id", 'Genthru', 'The Bomber');
-```
-
-Error:
-
-> can't convert "text" to int64
-
-We are trying to insert in `id` field of type `TEXT` into an `INTEGER` field, they are not [compatible]({{< relref "/docs/genji-sql/data-types" >}}#explicit-conversion).
-
-Let's try with a `FLOAT64` this time:
-
-```sql
-INSERT INTO users (id, first_name, alias) VALUES (3.14, 'Genthru', 'The Bomber');
-```
-
-Error:
-
-> cannot convert float64 value to integer without loss of precision
-
-It is because of the `.14` part of the number, converting it to an integer means losing precision.
-
-```sql
 INSERT INTO users (id, first_name, alias) VALUES (1, 'Genthru', 'The Bomber');
 ```
 
@@ -145,7 +123,7 @@ INSERT INTO users (id, name, alias) VALUES (1, 'Genthru', 'The Bomber');
 
 It works!
 
-Since `age` is doesn't have a `NOT NULL` clause, it didn't complain.
+Since `age` doesn't have a `NOT NULL` clause, it didn't complain.
 
 Also, the document contains an `alias` field and Genji didn't complain. Field constraints only apply on the field they are associated with, they don't care about the other ones. That's what makes Genji different from "schemaful" databases, where the schema describes exactly the number of columns a row must always have.
 

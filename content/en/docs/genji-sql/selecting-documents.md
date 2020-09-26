@@ -122,40 +122,40 @@ SELECT name, parent.father FROM users;
 }
 ```
 
-In this example, we used the [dot notation]({{< relref "/docs/genji-sql/documents" >}}#dot-notation) to select the `parent.father` field of our users.
+In this example, we used a [field reference]({{< relref "/docs/genji-sql/documents" >}}#field-references) to select the `parent.father` field of our users.
 
 Let's add the information about the first ability they master:
 
 ```sql
-SELECT name, parent.father, abilities.0 FROM users;
+SELECT name, parent.father, abilities[0] FROM users;
 ```
 
 ```json
 {
     "name": "Gon",
     "parents.father": "Ging Freecs",
-    "abilities.0": "Jajanken"
+    "abilities[0]": "Jajanken"
 }
 {
     "name": "Kirua",
     "parents.father": "Silva Zoldyck",
-    "abilities.0": "Lighning Palm"
+    "abilities[0]": "Lighning Palm"
 }
 {
     "name": "Hisoka",
     "parents.father": null,
-    "abilities.0": "Bungee Gum"
+    "abilities[0]": "Bungee Gum"
 }
 ```
 
-`abilities.0` is a dot notation that indicates to select the element at index `0` of the `abilities` array.
+`abilities[0]` is a dot notation that indicates to select the element at index `0` of the `abilities` array.
 
 ## Controlling the name of projected fields
 
-The result of the query above contains fields named `parents.father` and `abilities.0`, which isn't that great. Let's rename them to more clean names:
+The result of the query above contains fields named `parents.father` and `abilities[0]`, which isn't that great. Let's rename them to more clean names:
 
 ```sql
-SELECT name, parent.father AS father, abilities.0 AS main_skill FROM users;
+SELECT name, parent.father AS father, abilities[0] AS main_skill FROM users;
 ```
 
 ```json

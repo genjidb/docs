@@ -30,7 +30,7 @@ Creating a table with constraints uses a notation that is close to other relatio
 CREATE TABLE users (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
-    age INT8
+    age INTEGER
     address.zipCode TEXT
 )
 ```
@@ -39,8 +39,8 @@ This will create a table `users` with the following constraints:
 
 * All documents must have a non-empty `id` field, whose type can be converted to an integer. This field will be used as the primary key of the table and will be stored as an integer.
 * All documents must have a non-empty `name` field that can be converted to `TEXT`.
-* If a document has an `age` field, it will be converted to a one-byte integer.
-* If a document has an `address` field and its value is a document with a `zipCode` field, then its value will be converted to `TEXT`. Note that this constraint uses *dot notation*.
+* If a document has an `age` field, it will be converted to an integer.
+* If a document has an `address` field and its value is a document with a `zipCode` field, then its value will be converted to `TEXT`. Note that this constraint uses [field references]({{< relref "/docs/genji-sql/documents.md#field-references" >}}).
 
 Unlike relational databases though, a document doesn't have to contain only the fields described in the constraint list. A constraint only applies to its associated field.
 

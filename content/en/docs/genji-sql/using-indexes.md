@@ -13,7 +13,7 @@ Indexes are created using the `CREATE INDEX` statement.
 ```sql
 CREATE INDEX idx_nen ON users(nen);
 CREATE INDEX idx_address_city ON users(address.city);
-CREATE INDEX `main skill index` ON users(skills.0);
+CREATE INDEX `main skill index` ON users(skills[0]);
 ```
 
 Every index must have a name and must indicate on which table and field they operate. Note that is it possible to index nested fields or array values as well.

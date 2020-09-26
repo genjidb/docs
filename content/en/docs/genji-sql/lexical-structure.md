@@ -119,10 +119,10 @@ Identifiers are a sequence of characters that refer to table names, field names 
 
 Identifiers may be unquoted or surrounded by backquotes. Depending on that, different rules may apply.
 
-| Unquoted identifiers | Identifiers surrounded by backquotes |
-| ---|--- |
+| Unquoted identifiers                                                       | Identifiers surrounded by backquotes                                             |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Must begin with an uppercase or lowercase ASCII character or an underscore | May contain any unicode character, other than the new line character (i.e. `\n`) |
-| May contain only ASCII letters, digits and underscore | May contain escaped `"` character (i.e. `\"`) |
+| May contain only ASCII letters, digits and underscore                      | May contain escaped `"` character (i.e. `\"`)                                    |
 
 ```text
 foo
@@ -131,14 +131,14 @@ _foo_123_
 `foo \` bar`
 ```
 
-## Dot notation
+## Field references
 
-The [dot notation]({{< relref "/docs/genji-sql/documents" >}}#dot-notation) is any sequence of characters that one or more [identifiers](#identifiers) separated by dots.
+A [field reference]({{< relref "/docs/genji-sql/documents" >}}#field-references) is any sequence of characters that one or more [identifiers](#identifiers) separated by dots or square brackets.
 
 ```text
 foo
 foo.bar
-foo."bar baz".0.bat
+foo."bar baz"[0].bat
 ```
 
-Depending on the context, a single identifier with no dot will be parsed an identifier or as dot notation.
+Depending on the context, a single identifier with no dot or square bracket will be parsed an identifier or as field reference.

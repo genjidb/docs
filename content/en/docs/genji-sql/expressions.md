@@ -41,38 +41,33 @@ Any [literal]({{< relref "/docs/genji-sql/lexical-structure" >}}#literals) evalu
 
 ### Strings
 
-[Strings]({{< relref "/docs/genji-sql/lexical-structure" >}}#literals) are evaluated to the [`text`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type, which are utf-8 encoded.
+[Strings]({{< relref "/docs/genji-sql/lexical-structure" >}}#literals) are evaluated to the [`TEXT`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type, which are utf-8 encoded.
 
 ### Integers
 
-[Integers]({{< relref "/docs/genji-sql/lexical-structure" >}}#integers) are evaluated into the smallest [integer]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type that can contain the value.
+[Integers]({{< relref "/docs/genji-sql/lexical-structure" >}}#integers) are evaluated into the [INTEGER]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
 
-Example:
-
-- `10` will be evaluated to an `int8`, because is it bigger than -128 and smaller than 127
-- `-500` will be evaluated to an `int16`, because it is smaller than -128 but bigger than -32768
-
-If an integer is bigger than the maximum `int64` value or smaller than the minimum `int64` value, it will be evaluated as a `float64`.
+If an integer is bigger than the maximum value of a 64 bit integer or smaller than the minimum 64 bit integer value, it will be evaluated as a `DOUBLE`.
 
 ### Floats
 
-[Floats]({{< relref "/docs/genji-sql/lexical-structure" >}}#floats) are evaluated into the [`float64`]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
+[Floats]({{< relref "/docs/genji-sql/lexical-structure" >}}#floats) are evaluated into the [`DOUBLE`]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
 
 ### Booleans
 
-[Booleans]({{< relref "/docs/genji-sql/lexical-structure" >}}#booleans) are evaluated into the [`bool`]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
+[Booleans]({{< relref "/docs/genji-sql/lexical-structure" >}}#booleans) are evaluated into the [`BOOL`]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
 
 ### Arrays
 
-[Arrays]({{< relref "/docs/genji-sql/lexical-structure" >}}#arrays) are evaluated into the [`array`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type.
+[Arrays]({{< relref "/docs/genji-sql/lexical-structure" >}}#arrays) are evaluated into the [`ARRAY`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type.
 
 ### Documents
 
-[Documents]({{< relref "/docs/genji-sql/lexical-structure" >}}#documents) are evaluated into the [`document`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type.
+[Documents]({{< relref "/docs/genji-sql/lexical-structure" >}}#documents) are evaluated into the [`DOCUMENT`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type.
 
-### Dot notation
+### Field references
 
-[Dot notations]({{< relref "/docs/genji-sql/lexical-structure" >}}#dot-notation) are evaluated into the value they refer to.
+[Field references]({{< relref "/docs/genji-sql/lexical-structure" >}}#field-references) are evaluated into the value they refer to.
 They are used to select a value from a [document]({{< relref "/docs/genji-sql/documents" >}}).
 Their type will depend on the type of the value extracted from the document.
 
@@ -102,7 +97,7 @@ recipes
         ]
     }
 
-`cooking-time`.eggs.2
+`cooking-time`.eggs[2]
 -> 9
 ```
 
@@ -156,7 +151,8 @@ Examples:
 #### Conversion during comparison
 
 Prior to comparison, an implicit conversion is operated for the operands to be of the same type.
-Not all types can be compared together. When two incompatible types are compared, the comparison always returns `false`.
+Not all types can be compared together. When two incompatible types are compared, the comparison always returns `false`,
+except if one of the operands is NULL, in that case it returns NULL.
 
 Example:
 
@@ -172,34 +168,18 @@ Example:
 
 The comparison follows a list of rules that are executed in order:
 
-- If one of the operands is NULL, use the [Comparing with NULL](#comparing-with-null) rule
+- If one of the operands is NULL, return `NULL`.
 - If both operands are documents, use the [Comparing documents](#comparing-documents) rule
 - If both operands are arrays, use the [Comparing arrays](#comparing-arrays) rule
-- If one of the operands is a boolean, use the [Comparing with boolean](#comparing-with-a-boolean) rule
-- If both operands are either text or blob, compare them byte per byte
-- If both operands are integers, compare them together
-- If both operands are numbers (integer or float), convert them to 64 float then compare them together.
+- If both operands are numbers (INTEGER or DOUBLE), cast the integer to DOUBLE then compare them together.
+- If both operands have the same type, compare them together.
 
 In any other case, return `false`.
 
-#### Comparing with NULL
-
-Any comparison with NULL will return `false`, except in the following cases:
-
-- `NULL = NULL`
-- `NULL >= NULL`
-- `NULL <= NULL`
-- Using the `!=` operator with a value other than NULL will return `true`. (Ex: `1 != null`, `foo != NULL`, etc.)
-
 #### Comparing documents
 
-Only the `=` operator is supported when comparing documents.
-
-A document is equal to another document if all of the following conditions are verified:
-
-- it has the same number of fields
-- all the fields of the first document are present in the other document
-- every field of the first document is equal to the same field in the other document
+The fields of each document are sorted, then they are compared one by one, until they are found not equal. The comparison is then determined by the result of the comparison between these two values.
+If both keys are equal, compare the values.
 
 ```python
 {a: 1, b: 2} = {b: 2, a: 1}
@@ -207,6 +187,12 @@ A document is equal to another document if all of the following conditions are v
 
 {} = {}
 -> true
+
+{a: 1, b: 3} > {a: 1, b: 2}
+-> true
+
+{a: 100} > {aa: 1}
+-> false
 ```
 
 #### Comparing arrays
@@ -241,36 +227,6 @@ The size of arrays doesn't matter, unless all the elements of the smallest one a
 -> true
 ```
 
-#### Comparing with a boolean
-
-When comparing booleans together, there is a simple rule: `true` is greater than `false`.
-
-```python
-true > false
--> true
-
-false < true
--> true
-```
-
-If an operand is a boolean, but the other one is not, the other operand will be converted to a boolean, following these rules:
-
-- `TEXT`: a non-empty text is equal to `true`, otherwise `false`
-- `BLOB`: a non-empty blob is equal to `true`, otherwise `false`
-- any number: if the number is different than 0, convert to `true`, otherwise `false`
-- document: if the document contains at least one field, convert to `true`, otherwise `false`
-- array: if the array contains at least one value, convert to `true`, otherwise `false`
-
-Examples:
-
-```python
-"foo" > false
--> true
-
-"" = {} = [] = 0 = false
--> true
-```
-
 ### Arithmetic operators
 
 | Name | Description                                                |
@@ -286,11 +242,21 @@ Examples:
 
 Arithmetic operations are supported only for the following types:
 
-- `integer`
-- `int8`, `int16`, `int32`, `int64`
-- `float64`
-- `duration`
-- `bool`
+- `INTEGER`
+- `DOUBLE`
+- `DURATION`
+
+Note that `INTEGER` and `DOUBLE` types can be calculated together, in that case `INTEGER` values will be converted to `DOUBLE` prior the operation. `DURATION` values however can only be calculated together.
+
+Any usage of these operators on incompatible types will return `NULL`.
+
+```python
+3 + 3.5
+-> 6.5
+
+3 + 1ms
+-> NULL
+```
 
 #### The case of NULL
 
@@ -308,22 +274,15 @@ NULL + 1
 
 The division obeys a few rules depending on the types of the operands:
 
-- Dividing two integers, always result in an integer
+- Dividing two integers, always results in an integer
 - Dividing by zero, returns `NULL`
-
-#### Conversion rules
-
-When running an arithmetic operation on two values of different types, an implicit conversion occurs, following this set of rules:
-
-- if one of the operands is a boolean, convert to an integer
-- if one of the operands is a float, convert the other one to float
 
 #### Return type and overflow
 
 The type of the result of an operation doesn't necessarily match the type of the operands.
 
-- The result of a float operation will always return a float
-- The result of an integer operation will return the smallest integer type that can hold the return value, unless the return value is bigger than the maximum value of 64-bit integer. In that case, the return type will be a float
+- The result of a DOUBLE operation will always return a DOUBLE
+- The result of an INTEGER operation will return an INTEGER, unless the return value is bigger than the maximum value of 64-bit integer. In that case, the return type will be a DOUBLE
 
 ### Evaluation tree and precedence
 

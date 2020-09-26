@@ -46,9 +46,9 @@ Any JSON object is a valid document and can be inserted as-is.
 
 Field names can be any string, with only one exception: they cannot be empty.
 
-## Dot notation
+## Field references
 
-The _dot notation_ is a way to refer to fields of a document or elements of an array.
+A _field reference_ is a way to refer to fields of a document or elements of an array.
 
 Given the following document:
 
@@ -91,6 +91,6 @@ To access an element of an array, use the index of the element
 
 _Examples_:
 
-* `friends.0` will evaluate to `{"name": "Bar","address": {"city":"Paris","zipcode": "75001"}}`
-* `friends.1.name` will evaluate to `"Baz"`
-* `friends.1."favorite game"` will evaluate to `"ffix"`
+* `friends[0]` will evaluate to `{"name": "Bar","address": {"city":"Paris","zipcode": "75001"}}`
+* `friends[1].name` will evaluate to `"Baz"`
+* `friends[1]."favorite game"` will evaluate to `"ffix"`
