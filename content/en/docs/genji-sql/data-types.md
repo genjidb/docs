@@ -7,29 +7,16 @@ description: >
 ---
 
 Genji provides a list of simple data types to store and manipulate data.
-There are basically two kinds of data types:
 
-* *Fixed size data types*: Types who use a fixed amount of space regardless of the value stored in them.
-* *Variable size data types*: Types who take more or less space depending on the value stored in them.
-
-## Fixed size data types
-
-| Name   | Description                     | From                     | To                      |
-| ------ | ------------------------------- | ------------------------ | ----------------------- |
-| BOOL   | Can be either `true` or `false` | `false`                  | `true`                  |
-| DOUBLE | 8 bytes decimal                 | -1.7976931348623157e+308 | 1.7976931348623157e+308 |
-
-## Variable size data types
-
-| Name     | Description                                                                              |
-| -------- | ---------------------------------------------------------------------------------------- |
-| INTEGER  | Signed integer which takes 1, 2, 4 or 8 bytes depending on the size of the stored number |
-| INT      | Alias for `INTEGER`                                                                      |
-| DURATION | Represents a length of time in nanoseconds. Stored as an INTEGER                         |
-| BLOB     | Variable size BLOB of data                                                               |
-| TEXT     | Variable size UTF-8 encoded string                                                       |
-| ARRAY    | ARRAY of values of any type                                                              |
-| DOCUMENT | Object that contains pairs that associate a string field to a value of any type          |
+| Name     | Description                                                                              | From                     | To                      |
+| -------- | ---------------------------------------------------------------------------------------- | ------------------------ | ----------------------- |
+| BOOL     | Can be either `true` or `false`                                                          | `false`                  | `true`                  |
+| INTEGER  | Signed integer which takes 1, 2, 4 or 8 bytes depending on the size of the stored number | -9223372036854775808     | 9223372036854775807     |
+| DOUBLE   | 8 bytes decimal                                                                          | -1.7976931348623157e+308 | 1.7976931348623157e+308 |
+| BLOB     | Variable size BLOB of data                                                               |                          |                         |
+| TEXT     | Variable size UTF-8 encoded string                                                       |                          |                         |
+| ARRAY    | ARRAY of values of any type                                                              |                          |                         |
+| DOCUMENT | Object that contains pairs that associate a string field to a value of any type          |                          |                         |
 
 ## The case of NULL
 
@@ -61,12 +48,9 @@ Here is a table describing type compatibility.
 | INTEGER     | TEXT        | yes                                               | `CAST(10 AS TEXT)   -> '10'`               |
 | DOUBLE      | INTEGER     | yes, cuts off the decimal part                    | `CAST(10.5 AS DOUBLE) -> 10`               |
 | DOUBLE      | TEXT        | yes                                               | `CAST(10.5 AS DOUBLE) -> '10.5'`           |
-| DURATION    | INTEGER     | yes                                               | `CAST(1ms AS INTEGER) -> 1000000`          |
-| DURATION    | TEXT        | yes                                               | `CAST(1ms AS TEXT) -> '1ms'`               |
 | TEXT        | BOOL        | yes, if the content is a valid boolean            | `CAST('true' AS BOOL) -> true`             |
 | TEXT        | INTEGER     | yes, if the content is a valid integer            | `CAST('10' AS INTEGER) -> 10`              |
 | TEXT        | DOUBLE      | yes, if the content is a valid decimal number     | `CAST('10.4' AS DOUBLE) -> 10.4`           |
-| TEXT        | DURATION    | yes, if the content is a valid duration           | `CAST('1ms' AS DURATION) -> '1ms'`         |
 | TEXT        | BLOB        | yes, if the content is a valid base64 value       | `CAST('aGVsbG8K' AS BLOB) -> 'aGVsbG8K'`   |
 | TEXT        | ARRAY       | yes, if the content is a valid json array         | `CAST('[1, 2, 3]' AS ARRAY) -> [1, 2, 3]`  |
 | TEXT        | DOCUMENT    | yes, if the content is a valid json object        | `CAST('{"a": 1}' AS DOCUMENT) -> {"a": 1}` |

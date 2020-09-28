@@ -244,9 +244,8 @@ Arithmetic operations are supported only for the following types:
 
 - `INTEGER`
 - `DOUBLE`
-- `DURATION`
 
-Note that `INTEGER` and `DOUBLE` types can be calculated together, in that case `INTEGER` values will be converted to `DOUBLE` prior the operation. `DURATION` values however can only be calculated together.
+Note that `INTEGER` and `DOUBLE` types can be calculated together, in that case `INTEGER` values will be converted to `DOUBLE` prior the operation.
 
 Any usage of these operators on incompatible types will return `NULL`.
 
@@ -254,7 +253,7 @@ Any usage of these operators on incompatible types will return `NULL`.
 3 + 3.5
 -> 6.5
 
-3 + 1ms
+3 + '1'
 -> NULL
 ```
 
