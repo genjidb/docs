@@ -104,7 +104,7 @@ The only exception is for the `*` wildcard, which projects all the fields of the
 Let's determine who is the father of our users:
 
 ```sql
-SELECT name, parent.father FROM users;
+SELECT name, parents.father FROM users;
 ```
 
 ```json
@@ -122,12 +122,12 @@ SELECT name, parent.father FROM users;
 }
 ```
 
-In this example, we used a [field reference]({{< relref "/docs/genji-sql/documents" >}}#field-references) to select the `parent.father` field of our users.
+In this example, we used a [field reference]({{< relref "/docs/genji-sql/documents" >}}#field-references) to select the `parents.father` field of our users.
 
 Let's add the information about the first ability they master:
 
 ```sql
-SELECT name, parent.father, abilities[0] FROM users;
+SELECT name, parents.father, abilities[0] FROM users;
 ```
 
 ```json
@@ -155,7 +155,7 @@ SELECT name, parent.father, abilities[0] FROM users;
 The result of the query above contains fields named `parents.father` and `abilities[0]`, which isn't that great. Let's rename them to more clean names:
 
 ```sql
-SELECT name, parent.father AS father, abilities[0] AS main_skill FROM users;
+SELECT name, parents.father AS father, abilities[0] AS main_skill FROM users;
 ```
 
 ```json
