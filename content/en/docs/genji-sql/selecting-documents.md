@@ -219,6 +219,48 @@ In this example, only Gon satisfies the query:
 - Kirua's age is greater 14 which is not `< 14`
 - Hisoka's age is `null`, which is also not `< 14`
 
+## Filtering on values in nested objects
+
+We can filter on values in nested arrays using the `IN` operator:
+
+```sql
+SELECT * FROM users WHERE 'Bungee Gum' IN abilities;
+```
+
+```json
+{
+  "name": "Hisoka",
+  "nen": "Transmutation",
+  "abilities": [
+    "Bungee Gum",
+    "Texture Surprise"
+  ]
+}
+```
+
+And values in nested documents using dot notation:
+
+```sql
+SELECT * FROM users WHERE parents.father = 'Silva Zoldyck';
+```
+
+```json
+{
+  "name": "Kirua",
+  "age": 14,
+  "nen": "Transmutation",
+  "parents": {
+    "father": "Silva Zoldyck",
+    "mother": "Kikyo Zoldyck"
+  },
+  "abilities": [
+    "Lighning Palm",
+    "Thunderbolt",
+    "Godspeed"
+  ]
+}
+```
+
 ## Ordering results
 
 The order in which results are returned can be controlled, using the `ORDER BY` clause
