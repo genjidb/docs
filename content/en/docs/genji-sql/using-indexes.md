@@ -40,8 +40,8 @@ CREATE UNIQUE INDEX idx_email ON users(email);
 A unique index ensures that the indexed fields do not store duplicate values.
 Note that `NULL` values will have the same constraints, meaning that only one document who doesn't contain the indexed field, or whose field is equal to `NULL` will be able to be inserted.
 
-To delete indexes, use the `DELETE INDEX` statement
+To delete indexes, use the `DROP INDEX` statement
 
 ```sql
-DELETE INDEX idx_address_city;
+DROP INDEX idx_address_city;
 ```
