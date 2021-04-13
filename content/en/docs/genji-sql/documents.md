@@ -46,9 +46,9 @@ Any JSON object is a valid document and can be inserted as-is.
 
 Field names can be any string, with only one exception: they cannot be empty.
 
-## Field references
+## Paths
 
-A _field reference_ is a way to refer to fields of a document or elements of an array.
+A _path_ is a way to refer to fields of a document or elements of an array.
 
 Given the following document:
 

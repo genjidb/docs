@@ -112,9 +112,9 @@ _foo_123_
 `foo \` bar`
 ```
 
-## Field references
+## Paths
 
-A [field reference]({{< relref "/docs/genji-sql/documents" >}}#field-references) is any sequence of characters that one or more [identifiers](#identifiers) separated by dots or square brackets.
+A [path]({{< relref "/docs/genji-sql/documents" >}}#paths) is any sequence of characters that contains one or more [identifiers](#identifiers) separated by dots or square brackets.
 
 ```text
 foo
@@ -122,4 +122,4 @@ foo.bar
 foo."bar baz"[0].bat
 ```
 
-Depending on the context, a single identifier with no dot or square bracket will be parsed an identifier or as field reference.
+Depending on the context, a single identifier with no dot or square bracket will be parsed as an identifier or as a path.

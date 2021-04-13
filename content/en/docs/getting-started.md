@@ -9,7 +9,7 @@ description: >
 
 ## Prerequisites
 
-Genji requires at least Go 1.12.
+Genji requires at least Go 1.16.
 
 ## Installation
 

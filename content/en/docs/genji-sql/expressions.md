@@ -65,9 +65,9 @@ If an integer is bigger than the maximum value of a 64 bit integer or smaller th
 
 [Documents]({{< relref "/docs/genji-sql/lexical-structure" >}}#documents) are evaluated into the [`DOCUMENT`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type.
 
-### Field references
+### Paths
 
-[Field references]({{< relref "/docs/genji-sql/lexical-structure" >}}#field-references) are evaluated into the value they refer to.
+[Paths]({{< relref "/docs/genji-sql/lexical-structure" >}}#paths) are evaluated into the value they refer to.
 They are used to select a value from a [document]({{< relref "/docs/genji-sql/documents" >}}).
 Their type will depend on the type of the value extracted from the document.
 

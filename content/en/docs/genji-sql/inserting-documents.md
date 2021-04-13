@@ -144,3 +144,15 @@ INSERT INTO users (id, name, age) VALUES (1, 'Biscuit', 57);
 ```
 
 It works!
+
+## Inserting documents from another table
+
+It is also possible to insert documents selected from another table, using the `INSERT ... SELECT` notation.
+
+```sql
+-- create a new table to store the list of all of our users names
+CREATE TABLE names(name TEXT);
+
+-- select all non-null names and store them in that new table.
+INSERT INTO names SELECT name FROM users WHERE name IS NOT NULL;
+```
