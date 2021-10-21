@@ -3,15 +3,15 @@ title: "Selecting Documents"
 date: 2020-04-10T08:57:17+04:00
 weight: 70
 description: >
-    How to use the SELECT statement to query documents in a table
+  How to use the SELECT statement to query documents in a table
 ---
 
 Querying documents from a table can be achieved by using the `SELECT` statement.
 
-In the Genji database, a *query* does two things:
+In the Genji database, a _query_ does two things:
 
 - it reads documents from a table
-- it uses the arguments of the query to transform, filter and project that data to create a *result*, which is a stream of documents.
+- it uses the arguments of the query to transform, filter and project that data to create a _result_, which is a stream of documents.
 
 This stream of documents can be consumed by the caller one by one, and each document will contain the fields the user chose.
 
@@ -68,7 +68,7 @@ SELECT * FROM users;
 Let's break it down:
 
 - `SELECT`: Run the SELECT command
-- `*`: This is the *projection*, it indicates how to build the documents returned by the result of the query. Here, we are using a special projection called the *wildcard*, which is a way to tell Genji to simply project all of the fields of each document.
+- `*`: This is the _projection_, it indicates how to build the documents returned by the result of the query. Here, we are using a special projection called the _wildcard_, which is a way to tell Genji to simply project all of the fields of each document.
 - `FROM users`: Indicates from which table we want to query the data.
 
 ## Understanding projections
@@ -122,7 +122,7 @@ SELECT name, parents.father FROM users;
 }
 ```
 
-In this example, we used a [field reference]({{< relref "/docs/genji-sql/documents" >}}#field-references) to select the `parents.father` field of our users.
+In this example, we used a [field reference]({{< relref "/genji-sql/documents" >}}#field-references) to select the `parents.father` field of our users.
 
 Let's add the information about the first ability they master:
 
@@ -176,7 +176,7 @@ SELECT name, parents.father AS father, abilities[0] AS main_skill FROM users;
 }
 ```
 
-The `AS` clause allows creating *aliases* to rename projected fields.
+The `AS` clause allows creating _aliases_ to rename projected fields.
 
 ## Filter documents
 
@@ -198,10 +198,10 @@ SELECT name FROM users WHERE nen = 'Transmutation';
 
 This time, the result contains only two documents.
 
-The `WHERE` clause allows filtering the documents returned. To do that, it evaluates an [expression]({{< relref "/docs/genji-sql/expressions" >}}) on every document:
+The `WHERE` clause allows filtering the documents returned. To do that, it evaluates an [expression]({{< relref "/genji-sql/expressions" >}}) on every document:
 
-- if the result of the evaluation is *truthy*, the document is selected
-- if the result of the evaluation is *falsy*, the document is filtered out
+- if the result of the evaluation is _truthy_, the document is selected
+- if the result of the evaluation is _falsy_, the document is filtered out
 
 ```sql
 SELECT name, age FROM users WHERE age < 14;
@@ -209,8 +209,8 @@ SELECT name, age FROM users WHERE age < 14;
 
 ```json
 {
-    "name": "Gon",
-    "age": 13
+  "name": "Gon",
+  "age": 13
 }
 ```
 
@@ -231,10 +231,7 @@ SELECT * FROM users WHERE 'Bungee Gum' IN abilities;
 {
   "name": "Hisoka",
   "nen": "Transmutation",
-  "abilities": [
-    "Bungee Gum",
-    "Texture Surprise"
-  ]
+  "abilities": ["Bungee Gum", "Texture Surprise"]
 }
 ```
 
@@ -253,11 +250,7 @@ SELECT * FROM users WHERE parents.father = 'Silva Zoldyck';
     "father": "Silva Zoldyck",
     "mother": "Kikyo Zoldyck"
   },
-  "abilities": [
-    "Lighning Palm",
-    "Thunderbolt",
-    "Godspeed"
-  ]
+  "abilities": ["Lighning Palm", "Thunderbolt", "Godspeed"]
 }
 ```
 
@@ -286,9 +279,9 @@ SELECT name, age FROM users ORDER BY age;
 
 The order in which documents will appear depends on three factors:
 
-- the *direction* or the order
-- the *type* of the field used for ordering
-- the *value* of the field used for ordering
+- the _direction_ or the order
+- the _type_ of the field used for ordering
+- the _value_ of the field used for ordering
 
 By default, the direction is ascending, from the smallest value to the highest.
 
@@ -339,7 +332,7 @@ SELECT name FROM users WHERE nen = 'Transmutation' ORDER BY age DESC LIMIT 1;
 
 ```json
 {
-    "name": "Hisoka"
+  "name": "Hisoka"
 }
 ```
 

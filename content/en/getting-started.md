@@ -39,7 +39,7 @@ To open an in-memory database, simply type:
 genji
 ```
 
-You can then enter your [SQL queries]({{< relref "/docs/getting-started" >}}) directly in the shell.
+You can then enter your [SQL queries]({{< relref "/getting-started" >}}) directly in the shell.
 
 It is also possible to create an on-disk database, using either [BoltDB](https://github.com/etcd-io/bbolt) or [Badger](https://github.com/dgraph-io/badger).
 
@@ -61,4 +61,4 @@ genji --badger pathToDBDir
 
 ## Next step
 
-Once Genji is setup, follow the [Genji SQL]({{< relref "/docs/genji-sql/_index.md" >}}) chapter to learn how to run queries.
+Once Genji is setup, follow the [Genji SQL]({{< relref "/genji-sql/_index.md" >}}) chapter to learn how to run queries.

@@ -3,7 +3,7 @@ title: "Lexical Structure"
 date: 2020-03-29T17:48:51+04:00
 weight: 30
 description: >
-    Describes of how SQL components are parsed by Genji.
+  Describes of how SQL components are parsed by Genji.
 ---
 
 Whenever Genji receives a query, it will be parsed according to the following rules and transformed into components Genji can understand.
@@ -35,9 +35,9 @@ An integer is a sequence of characters that only contain digits. They may start 
 
 A float is a sequence of characters that contains three parts:
 
-* a sequence of digits
-* a decimal point \(i.e. `.`\)
-* a sequence of digits
+- a sequence of digits
+- a decimal point \(i.e. `.`\)
+- a sequence of digits
 
 They may start with a `+` or a `-` sign.
 
@@ -64,10 +64,10 @@ FALse
 
 An array is any sequence of character that starts and ends with either:
 
-* `(` and `)`
-* `[` and `]`
+- `(` and `)`
+- `[` and `]`
 
-and that contains a coma-separated list of [expressions]({{< relref "/docs/genji-sql/expressions" >}}).
+and that contains a coma-separated list of [expressions]({{< relref "/genji-sql/expressions" >}}).
 
 ```python
 [1.5, "hello", 1 > 10, [true, -10], {foo: "bar"}]
@@ -76,7 +76,7 @@ and that contains a coma-separated list of [expressions]({{< relref "/docs/genji
 ### Documents
 
 A document is any sequence of character that starts and ends with `{` and `}` and that contains a list of pairs.
-Each pair associates an identifier with an [expression]({{< relref "/docs/genji-sql/expressions" >}}), both separated by a colon. Each pair must be separated by a coma.
+Each pair associates an identifier with an [expression]({{< relref "/genji-sql/expressions" >}}), both separated by a colon. Each pair must be separated by a coma.
 
 ```js
 {
@@ -114,7 +114,7 @@ _foo_123_
 
 ## Paths
 
-A [path]({{< relref "/docs/genji-sql/documents" >}}#paths) is any sequence of characters that contains one or more [identifiers](#identifiers) separated by dots or square brackets.
+A [path]({{< relref "/genji-sql/documents" >}}#paths) is any sequence of characters that contains one or more [identifiers](#identifiers) separated by dots or square brackets.
 
 ```text
 foo

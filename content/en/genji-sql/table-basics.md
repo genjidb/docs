@@ -3,7 +3,7 @@ title: "Table Basics"
 date: 2020-03-30T20:27:04+04:00
 weight: 10
 description: >
-    How to create and remove tables
+  How to create and remove tables
 ---
 
 Though Genji stores its data in tables, there is no concept of rows or columns. A Genji table is simply a collection of documents.
@@ -37,10 +37,10 @@ CREATE TABLE users (
 
 This will create a table `users` with the following constraints:
 
-* All documents must have a non-empty `id` field, whose type can be converted to an integer. This field will be used as the primary key of the table and will be stored as an integer.
-* All documents must have a non-empty `name` field that can be converted to `TEXT`.
-* If a document has an `age` field, it will be converted to an integer.
-* If a document has an `address` field and its value is a document with a `zipCode` field, then its value will be converted to `TEXT`. Note that this constraint uses [field references]({{< relref "/docs/genji-sql/documents.md#field-references" >}}).
+- All documents must have a non-empty `id` field, whose type can be converted to an integer. This field will be used as the primary key of the table and will be stored as an integer.
+- All documents must have a non-empty `name` field that can be converted to `TEXT`.
+- If a document has an `age` field, it will be converted to an integer.
+- If a document has an `address` field and its value is a document with a `zipCode` field, then its value will be converted to `TEXT`. Note that this constraint uses [field references]({{< relref "/genji-sql/documents.md#field-references" >}}).
 
 Unlike relational databases though, a document doesn't have to contain only the fields described in the constraint list. A constraint only applies to its associated field.
 

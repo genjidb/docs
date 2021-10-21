@@ -3,7 +3,7 @@ title: "Inserting Documents"
 date: 2020-04-05T08:02:26+04:00
 weight: 50
 description: >
-    How to use the INSERT statement to insert documents in a table
+  How to use the INSERT statement to insert documents in a table
 ---
 
 When a table is created, it contains no documents. The `INSERT` statement can be used to add one or more new documents to the table.
@@ -34,8 +34,8 @@ Here is the JSON representation of the document created by this statement:
 
 ```json
 {
-    "name": "Gon",
-    "age": 13
+  "name": "Gon",
+  "age": 13
 }
 ```
 
@@ -65,7 +65,7 @@ INSERT INTO users (name, address) VALUES ("Kurapika", {city: "York Shin City", "
 INSERT INTO users (first_name, `last name`, skills) VALUES ("Zeno", 'Zoldik', ["Dragon Dive", "Dragon Head"] );
 ```
 
-It is also possible to omit the list of fields and use the [document expression]({{< relref "/docs/genji-sql/lexical-structure" >}}#documents):
+It is also possible to omit the list of fields and use the [document expression]({{< relref "/genji-sql/lexical-structure" >}}#documents):
 
 ```sql
 INSERT INTO users VALUES {name: "Hisoka", "age": "unknown"}
@@ -92,7 +92,7 @@ Only documents satisfying the following field constraints can be inserted in the
 - the document may have an `age` field. If it exists, it must be convertible to an `INTEGER`.
 - the document may have any other fields.
 
-The conversion compatible table can be found in the [data types]({{< relref "/docs/genji-sql/data-types" >}}#explicit-conversion) page.
+The conversion compatible table can be found in the [data types]({{< relref "/genji-sql/data-types" >}}#explicit-conversion) page.
 
 To see how it works, let's try inserting invalid documents:
 

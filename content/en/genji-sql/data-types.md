@@ -20,32 +20,32 @@ Genji provides a list of simple data types to store and manipulate data.
 
 ## The case of NULL
 
-In Genji, *NULL* is treated as both a value and a type. It represents the absence of data, and is returned in various cases:
+In Genji, _NULL_ is treated as both a value and a type. It represents the absence of data, and is returned in various cases:
 
-* when selecting a field that doesn't exists
-* when selecting a field whose value is NULL
-* as the result of the evaluation of an expression
+- when selecting a field that doesn't exists
+- when selecting a field whose value is NULL
+- as the result of the evaluation of an expression
 
 ## Conversion
 
 Whenever Genji needs to manipulate data of different types, depending on the situation it will rely on either:
 
-* **explicit conversion**: The source type and destination type are clearly identified. Ex: When inserting data to field with a constraint or when doing a `CAST`.
-* **implicit conversion**: Two values of different types need to be compared or used by an operator during the evaluation of an [expression]({{< relref "/docs/genji-sql/expressions.md" >}})
+- **explicit conversion**: The source type and destination type are clearly identified. Ex: When inserting data to field with a constraint or when doing a `CAST`.
+- **implicit conversion**: Two values of different types need to be compared or used by an operator during the evaluation of an [expression]({{< relref "/genji-sql/expressions.md" >}})
 
 ### Explicit conversion
 
-Explicit conversion is used when we want to convert a value of a *source* type into a *target* type.
+Explicit conversion is used when we want to convert a value of a _source_ type into a _target_ type.
 However, Genji types are not all compatible with one another, and when a user tries to convert them, Genji returns an error.
 Here is a table describing type compatibility.
 
 | Source type | Target type | Converted                                         | Example                                    |
 | ----------- | ----------- | ------------------------------------------------- | ------------------------------------------ |
-| BOOL        | INTEGER     | yes, `1` if `true`, otherwise `0`                 | `CAST(true AS INTEGER)   -> 1`             |
-| BOOL        | TEXT        | yes, `'true'` if `true`, otherwise `'false'`      | `CAST(true AS TEXT)   -> 'true'`           |
-| INTEGER     | BOOL        | yes, `false` if zero, otherwise `true`            | `CAST(10 AS BOOL)   -> true`               |
+| BOOL        | INTEGER     | yes, `1` if `true`, otherwise `0`                 | `CAST(true AS INTEGER) -> 1`               |
+| BOOL        | TEXT        | yes, `'true'` if `true`, otherwise `'false'`      | `CAST(true AS TEXT) -> 'true'`             |
+| INTEGER     | BOOL        | yes, `false` if zero, otherwise `true`            | `CAST(10 AS BOOL) -> true`                 |
 | INTEGER     | DOUBLE      | yes                                               | `CAST(10 AS DOUBLE) -> 10.0`               |
-| INTEGER     | TEXT        | yes                                               | `CAST(10 AS TEXT)   -> '10'`               |
+| INTEGER     | TEXT        | yes                                               | `CAST(10 AS TEXT) -> '10'`                 |
 | DOUBLE      | INTEGER     | yes, cuts off the decimal part                    | `CAST(10.5 AS DOUBLE) -> 10`               |
 | DOUBLE      | TEXT        | yes                                               | `CAST(10.5 AS DOUBLE) -> '10.5'`           |
 | TEXT        | BOOL        | yes, if the content is a valid boolean            | `CAST('true' AS BOOL) -> true`             |
@@ -61,5 +61,5 @@ Here is a table describing type compatibility.
 
 ### Implicit conversion
 
-There is only one kind of implicit conversion: `INTEGER` to `DOUBLE`. This usually takes place during the evaluation of an [expression]({{< relref "/docs/genji-sql/expressions" >}}) involving INTEGER and DOUBLE values.
+There is only one kind of implicit conversion: `INTEGER` to `DOUBLE`. This usually takes place during the evaluation of an [expression]({{< relref "/genji-sql/expressions" >}}) involving INTEGER and DOUBLE values.
 No other conversion is applied unless it's explicit.
