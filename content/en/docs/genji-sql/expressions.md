@@ -37,38 +37,38 @@ Here is a list of expressions supported by Genji.
 
 ## Literal expressions
 
-Any [literal]({{< relref "/genji-sql/lexical-structure" >}}#literals) evaluates to the closest compatible [type]({{< relref "/genji-sql/data-types" >}}#fixed-size-data-types).
+Any [literal]({{< relref "/docs/genji-sql/lexical-structure" >}}#literals) evaluates to the closest compatible [type]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types).
 
 ### Strings
 
-[Strings]({{< relref "/genji-sql/lexical-structure" >}}#literals) are evaluated to the [`TEXT`]({{< relref "/genji-sql/data-types" >}}#variable-size-data-types) type, which are utf-8 encoded.
+[Strings]({{< relref "/docs/genji-sql/lexical-structure" >}}#literals) are evaluated to the [`TEXT`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type, which are utf-8 encoded.
 
 ### Integers
 
-[Integers]({{< relref "/genji-sql/lexical-structure" >}}#integers) are evaluated into the [INTEGER]({{< relref "/genji-sql/data-types" >}}#fixed-size-data-types) type.
+[Integers]({{< relref "/docs/genji-sql/lexical-structure" >}}#integers) are evaluated into the [INTEGER]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
 
 If an integer is bigger than the maximum value of a 64 bit integer or smaller than the minimum 64 bit integer value, it will be evaluated as a `DOUBLE`.
 
 ### Floats
 
-[Floats]({{< relref "/genji-sql/lexical-structure" >}}#floats) are evaluated into the [`DOUBLE`]({{< relref "/genji-sql/data-types" >}}#fixed-size-data-types) type.
+[Floats]({{< relref "/docs/genji-sql/lexical-structure" >}}#floats) are evaluated into the [`DOUBLE`]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
 
 ### Booleans
 
-[Booleans]({{< relref "/genji-sql/lexical-structure" >}}#booleans) are evaluated into the [`BOOL`]({{< relref "/genji-sql/data-types" >}}#fixed-size-data-types) type.
+[Booleans]({{< relref "/docs/genji-sql/lexical-structure" >}}#booleans) are evaluated into the [`BOOL`]({{< relref "/docs/genji-sql/data-types" >}}#fixed-size-data-types) type.
 
 ### Arrays
 
-[Arrays]({{< relref "/genji-sql/lexical-structure" >}}#arrays) are evaluated into the [`ARRAY`]({{< relref "/genji-sql/data-types" >}}#variable-size-data-types) type.
+[Arrays]({{< relref "/docs/genji-sql/lexical-structure" >}}#arrays) are evaluated into the [`ARRAY`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type.
 
 ### Documents
 
-[Documents]({{< relref "/genji-sql/lexical-structure" >}}#documents) are evaluated into the [`DOCUMENT`]({{< relref "/genji-sql/data-types" >}}#variable-size-data-types) type.
+[Documents]({{< relref "/docs/genji-sql/lexical-structure" >}}#documents) are evaluated into the [`DOCUMENT`]({{< relref "/docs/genji-sql/data-types" >}}#variable-size-data-types) type.
 
 ### Paths
 
-[Paths]({{< relref "/genji-sql/lexical-structure" >}}#paths) are evaluated into the value they refer to.
-They are used to select a value from a [document]({{< relref "/genji-sql/documents" >}}).
+[Paths]({{< relref "/docs/genji-sql/lexical-structure" >}}#paths) are evaluated into the value they refer to.
+They are used to select a value from a [document]({{< relref "/docs/genji-sql/documents" >}}).
 Their type will depend on the type of the value extracted from the document.
 
 Given the following document:

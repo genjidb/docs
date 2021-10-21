@@ -6,15 +6,18 @@ Add styles or override variables from the theme here.
 
 $td-enable-google-fonts: false;
 
-$display1-weight: 400;
-$display3-weight: 400;
+// $display1-weight: 400;
+// $display3-weight: 400;
 
 $ghostwhite: #f7fafc;
 $whitesmoke: #edf2f7;
 
 $colors: (
-    "ghostwhite": $ghostwhite,
-    "whitesmoke": $whitesmoke
+  "ghostwhite": $ghostwhite,
+  "whitesmoke": $whitesmoke,
 );
 
 $td-sidebar-bg-color: $ghostwhite;
+
+$primary: #545e75;
+$secondary: #db5461;

@@ -1,21 +1,23 @@
-{{ $railroad := resources.Get "vendor/railroad.css" }}
-<link rel="stylesheet" href="{{ $railroad.RelPermalink }}">
+{{ $railroad := resources.Get "vendor/railroad.css" }} {{ $railroad := $railroad
+| resources.Minify }}
+
+<link rel="stylesheet" href="{{ $railroad.RelPermalink }}" />
 
 <style>
-    svg.railroad-diagram {
-        background: none !important;
-        max-width: 100%;
-    }
+  svg.railroad-diagram {
+    background: none !important;
+    max-width: 100%;
+  }
 
-    svg.railroad-diagram rect {
-        fill: rgb(255, 255, 255);
-    }
+  svg.railroad-diagram rect {
+    fill: rgb(255, 255, 255);
+  }
 
-    .railroad-toggle {
-        max-width: 80%;
-    }
+  .railroad-toggle {
+    max-width: 80%;
+  }
 
-    .rr-link a text {
-        text-decoration: underline;
-    }
+  .rr-link a text {
+    text-decoration: underline;
+  }
 </style>

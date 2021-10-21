@@ -122,7 +122,7 @@ SELECT name, parents.father FROM users;
 }
 ```
 
-In this example, we used a [field reference]({{< relref "/genji-sql/documents" >}}#field-references) to select the `parents.father` field of our users.
+In this example, we used a [field reference]({{< relref "/docs/genji-sql/documents" >}}#field-references) to select the `parents.father` field of our users.
 
 Let's add the information about the first ability they master:
 
@@ -198,7 +198,7 @@ SELECT name FROM users WHERE nen = 'Transmutation';
 
 This time, the result contains only two documents.
 
-The `WHERE` clause allows filtering the documents returned. To do that, it evaluates an [expression]({{< relref "/genji-sql/expressions" >}}) on every document:
+The `WHERE` clause allows filtering the documents returned. To do that, it evaluates an [expression]({{< relref "/docs/genji-sql/expressions" >}}) on every document:
 
 - if the result of the evaluation is _truthy_, the document is selected
 - if the result of the evaluation is _falsy_, the document is filtered out
