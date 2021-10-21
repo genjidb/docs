@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Genji"
+title: "What is Genji?"
 linkTitle: "Documentation"
 weight: 20
 type: list

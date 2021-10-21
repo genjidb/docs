@@ -1,0 +1,12 @@
+<script type="module">
+    import rr, * as rrClass from "/vendor/railroad.js";
+    Object.assign(window, rr);
+    window.rrOptions = rrClass.Options;
+
+    document.querySelectorAll(".language-railroad").forEach(element => {
+        const s = eval(element.textContent).format().toSVG();
+        // s.removeAttribute("width");
+        // s.removeAttribute("height");
+        element.parentNode.replaceChild(s, element);
+    });
+</script>

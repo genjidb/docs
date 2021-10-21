@@ -21,7 +21,7 @@ go get github.com/genjidb/genji
 
 ## Golang API documentation
 
-To learn how to embed Genji in your Go code, follow the instructions in the [Go package documentation](https://pkg.go.dev/github.com/genjidb/genji@v0.5.0?tab=doc).
+To learn how to embed Genji in your Go code, follow the instructions in the [Go package documentation](https://pkg.go.dev/github.com/genjidb/genji?tab=doc).
 
 ## Try it out!
 

@@ -15,7 +15,6 @@ Whenever Genji receives a query, it will be parsed according to the following ru
 A string is a sequence of characters surrounded by double or single quotes. They may contain any unicode character or escaped single or double quotes \(i.e `\'` or `\"`\)
 
 ```sql
-foo
 "l'école des fans"
 '(╯ಠ_ಠ）╯︵ ┳━┳'
 'foo \''
