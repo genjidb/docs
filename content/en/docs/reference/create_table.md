@@ -47,8 +47,11 @@ The name of the table to be created.
 
 ```js {.rr}
 Diagram(
-  Sequence("field-path"),
-  OptionalSequence("type-name", OneOrMore(Link("field-constraint")))
+  Sequence(Link("field-path", "/docs/essentials/expressions/#field-path")),
+  OptionalSequence(
+    Link("type-name", "/docs/essentials/data-types"),
+    OneOrMore(Link("field-constraint"))
+  )
 );
 ```
 
