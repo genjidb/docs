@@ -1,1 +1,0 @@
-Terminal("{{ .Get 0 }}", {href: "{{ if .Get 1 }}{{ ref . (.Get 1) }}{{ else }}#{{ .Get 0 }}{{ end }}", cls: "rr-link"})

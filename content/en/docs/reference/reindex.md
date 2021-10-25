@@ -7,9 +7,9 @@ description: >
 
 ## Synopsis
 
-### reindex-stmt
+### REINDEX statement
 
-```railroad
+```js {.rr}
 Diagram(
   Sequence("REINDEX", Optional(Choice(0, "table-name", "index-name"), "skip"))
 );

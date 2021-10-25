@@ -61,4 +61,4 @@ genji --badger pathToDBDir
 
 ## Next step
 
-Once Genji is setup, follow the [Genji SQL]({{< relref "/docs/genji-sql/_index.md" >}}) chapter to learn how to run queries.
+Once Genji is setup, follow the [Genji SQL]({{< relref "/docs/essentials/_index.md" >}}) chapter to learn how to run queries.

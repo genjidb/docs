@@ -7,17 +7,18 @@ description: >
 
 ## Synopsis
 
-### explain-stmt
+### EXPLAIN statement
 
-```railroad
+```js {.rr}
 Diagram(
   Sequence(
     "EXPLAIN",
-    Choice(0,
-      {{% rrlink "select-stmt" "select#select-stmt" %}},
-      {{% rrlink "insert-stmt" "insert#insert-stmt" %}},
-      {{% rrlink "update-stmt" "update#update-stmt" %}},
-      {{% rrlink "delete-stmt" "delete#delete-stmt" %}}
+    Choice(
+      0,
+      Link("select-stmt", "../select#select-stmt"),
+      Link("insert-stmt", "../insert#insert-stmt"),
+      Link("update-stmt", "../update#update-stmt"),
+      Link("delete-stmt", "../delete#delete-stmt")
     )
   )
 );

@@ -7,9 +7,9 @@ description: >
 
 ## Synopsis
 
-### create-sequence-stmt
+### CREATE SEQUENCE statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Sequence(
@@ -37,7 +37,7 @@ Diagram(
         Sequence("MAXVALUE", "integer"),
         Sequence("START", Optional("WITH", "skip"), "integer"),
         Sequence("CACHE", "integer"),
-        Sequence("CYCLE"),
+        Sequence("CYCLE")
       ),
       "skip"
     )

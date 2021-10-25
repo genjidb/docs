@@ -6,10 +6,13 @@
   Object.assign(window, rr);
   window.rrOptions = rrClass.Options;
 
-  document.querySelectorAll(".language-railroad").forEach((element) => {
+  window.Link = (text, url) => {
+    var href = url ? url : "#" + text;
+    return rr.Terminal(text, { href, cls: "rr-link" });
+  };
+
+  document.querySelectorAll(".rr .language-js").forEach((element) => {
     const s = eval(element.textContent).format().toSVG();
-    // s.removeAttribute("width");
-    // s.removeAttribute("height");
     element.parentNode.replaceChild(s, element);
   });
 </script>

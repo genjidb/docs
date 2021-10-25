@@ -7,10 +7,15 @@ description: >
 
 ## Synopsis
 
-### drop-index-stmt
+### DROP INDEX statement
 
-```railroad
+```js {.rr}
 Diagram(
-  Sequence("DROP", "INDEX", Optional(Sequence("IF", "EXISTS"), "skip"), "index-name")
+  Sequence(
+    "DROP",
+    "INDEX",
+    Optional(Sequence("IF", "EXISTS"), "skip"),
+    "index-name"
+  )
 );
 ```

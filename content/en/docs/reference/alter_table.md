@@ -7,38 +7,36 @@ description: >
 
 ## Synopsis
 
-### alter-table-stmt
+### ALTER TABLE statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Sequence("ALTER", "TABLE", "table-name"),
     Choice(
       0,
       Sequence("RENAME", "TO", "new-table-name"),
-      Sequence("ADD", "FIELD", {{% rrlink "field-definition" %}})
-    ),
+      Sequence("ADD", "FIELD", Link("field-definition"))
+    )
   )
 );
 ```
 
-### field-definition
+### Field definition
 
-```railroad
+```js {.rr}
 Diagram(
   Sequence("field-path"),
-  OptionalSequence(
-    "type-name",
-    OneOrMore({{% rrlink "field-constraint" %}})
-  ),
+  OptionalSequence("type-name", OneOrMore(Link("field-constraint")))
 );
 ```
 
-### field-constraint
+### Field constraint
 
-```railroad
+```js {.rr}
 Diagram(
-  Choice(0,
+  Choice(
+    0,
     Sequence("PRIMARY", "KEY"),
     Sequence("UNIQUE"),
     Sequence("NOT", "NULL"),

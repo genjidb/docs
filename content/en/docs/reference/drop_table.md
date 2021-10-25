@@ -7,10 +7,15 @@ description: >
 
 ## Synopsis
 
-### drop-table-stmt
+### DROP TABLE statement
 
-```railroad
+```js {.rr}
 Diagram(
-  Sequence("DROP", "TABLE", Optional(Sequence("IF", "EXISTS"), "skip"), "table-name")
+  Sequence(
+    "DROP",
+    "TABLE",
+    Optional(Sequence("IF", "EXISTS"), "skip"),
+    "table-name"
+  )
 );
 ```

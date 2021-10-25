@@ -7,22 +7,22 @@ description: >
 
 ## Synopsis
 
-### insert-stmt
+### INSERT statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Sequence("INSERT", "INTO", "table-name"),
-    Choice(0, {{% rrlink "values-clause" %}}, {{% rrlink "select-stmt" "select#select-stmt" %}}),
-    Optional({{% rrlink "conflict-clause" %}}, "skip"),
-    Optional({{% rrlink "returning-clause" %}}, "skip")
+    Choice(0, Link("values-clause"), Link("select-stmt", "select#select-stmt")),
+    Optional(Link("conflict-clause"), "skip"),
+    Optional(Link("returning-clause"), "skip")
   )
 );
 ```
 
-### values-clause
+### VALUES clause
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Choice(
@@ -34,15 +34,15 @@ Diagram(
         "VALUES",
         OneOrMore(Sequence("(", OneOrMore("expr", ","), ")"), ",")
       ),
-      Sequence("VALUES", OneOrMore({{% rrlink "document-literal" %}}, ",")),
+      Sequence("VALUES", OneOrMore(Link("document-literal"), ","))
     )
   )
 );
 ```
 
-### document-literal
+### Document literal
 
-```railroad
+```js {.rr}
 Diagram(
   "{",
   OneOrMore(Sequence(Choice(0, "identifier", "string"), ":", "expr"), ","),
@@ -50,9 +50,9 @@ Diagram(
 );
 ```
 
-### conflict-clause
+### Conflict clause
 
-```railroad
+```js {.rr}
 Diagram(
   Sequence(
     "ON",
@@ -68,48 +68,10 @@ Diagram(
 );
 ```
 
-### returning-clause
+### RETURNING clause
 
-```railroad
+```js {.rr}
 Diagram(
   Sequence("RETURNING", "expr", Optional(Sequence("AS", "alias"), "skip"))
-);
-```
-
-```railroad
-Diagram(
-  Stack(
-    Sequence("INSERT", "INTO", "table-name"),
-    Choice(
-      0,
-      Sequence(
-        "(",
-        OneOrMore("field-name", ","),
-        ")",
-        "VALUES",
-        OneOrMore(Sequence("(", OneOrMore("expr", ","), ")"), ",")
-      ),
-      Sequence("VALUES", OneOrMore({{% rrlink "document-literal" %}}, ",")),
-      {{% rrlink "select-stmt" "select#select-stmt" %}}
-    ),
-    Optional(
-      Sequence(
-        "ON",
-        "CONFLICT",
-        Choice(
-          0,
-          "IGNORE",
-          "REPLACE",
-          Sequence("DO", "NOTHING"),
-          Sequence("DO", "REPLACE")
-        )
-      ),
-      "skip"
-    ),
-    Optional(
-      Sequence("RETURNING", "expr", Optional(Sequence("AS", "alias"), "skip")),
-      "skip"
-    )
-  )
 );
 ```

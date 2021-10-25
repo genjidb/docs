@@ -7,49 +7,61 @@ description: >
 
 ## Synopsis
 
-### create-table-stmt
+### CREATE TABLE statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Sequence(
       "CREATE",
       "TABLE",
       Optional(Sequence("IF", "NOT", "EXISTS"), "skip"),
-      Sequence("table-name")
+      Sequence(Link("table-name"))
     ),
     Choice(
       0,
       Sequence(
-        OneOrMore({{% rrlink "field-definition" %}}, ","),
+        OneOrMore(Link("field-definition"), ","),
         Optional(
-          Sequence(",", OneOrMore({{% rrlink "table-constraint" %}}, ",")),
+          Sequence(",", OneOrMore(Link("table-constraint"), ",")),
           "skip"
         )
       ),
-      Sequence(OneOrMore({{% rrlink "table-constraint" %}}, ","))
+      Sequence(OneOrMore(Link("table-constraint"), ","))
     )
   )
 );
 ```
 
-### field-definition
+#### Parameters
 
-```railroad
+##### IF NOT EXISTS
+
+Do not throw an error if a table with the same name already exists.
+
+##### table-name
+
+The name of the table to be created.
+
+### Field definition
+
+```js {.rr}
 Diagram(
   Sequence("field-path"),
-  OptionalSequence(
-    "type-name",
-    OneOrMore({{% rrlink "field-constraint" %}})
-  ),
+  OptionalSequence("type-name", OneOrMore(Link("field-constraint")))
 );
 ```
 
-### field-constraint
+##### table-name
 
-```railroad
+The name of the table to be created.
+
+### Field constraint
+
+```js {.rr}
 Diagram(
-  Choice(0,
+  Choice(
+    0,
     Sequence("PRIMARY", "KEY"),
     Sequence("UNIQUE"),
     Sequence("NOT", "NULL"),
@@ -58,9 +70,9 @@ Diagram(
 );
 ```
 
-### table-constraint
+### Table constraint
 
-```railroad
+```js {.rr}
 Diagram(
   Choice(
     0,

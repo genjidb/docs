@@ -7,9 +7,9 @@ description: >
 
 ## Synopsis
 
-### create-index-stmt
+### CREATE INDEX statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Sequence("CREATE", Optional("UNIQUE", "skip"), "INDEX"),

@@ -7,9 +7,9 @@ description: >
 
 ## Synopsis
 
-### select-stmt
+### SELECT statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     OneOrMore(
@@ -18,9 +18,9 @@ Diagram(
           Sequence(
             "SELECT",
             Optional("DISTINCT", "skip"),
-            OneOrMore({{% rrlink "result-field" %}}, ",")
+            OneOrMore(Link("result-field"), ",")
           ),
-          Optional(Sequence("FROM", "table-name"), "skip"),
+          Optional(Sequence("FROM", Link("table-name")), "skip"),
           Optional(Sequence("WHERE", "expr"), "skip"),
           Optional(Sequence("GROUP", "BY", "expr"), "skip")
         ),
@@ -43,9 +43,9 @@ Diagram(
 );
 ```
 
-### result-field
+### Result field
 
-```railroad
+```js {.rr}
 Diagram(
   Choice(
     0,

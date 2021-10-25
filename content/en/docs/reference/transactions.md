@@ -7,9 +7,9 @@ description: >
 
 ## Synopsis
 
-### begin-transaction-stmt
+### BEGIN TRANSACTION statement
 
-```railroad
+```js {.rr}
 Diagram(
   Sequence(
     "BEGIN",
@@ -22,14 +22,14 @@ Diagram(
 );
 ```
 
-### rollback-transaction-stmt
+### ROLLBACK TRANSACTION statement
 
-```railroad
+```js {.rr}
 Diagram(Sequence("ROLLBACK", Optional("TRANSACTION", "skip")));
 ```
 
-### commit-transaction-stmt
+### COMMIT TRANSACTION statement
 
-```railroad
+```js {.rr}
 Diagram(Sequence("COMMIT", Optional("TRANSACTION", "skip")));
 ```

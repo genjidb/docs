@@ -7,9 +7,9 @@ description: >
 
 ## Synopsis
 
-### update-stmt
+### UPDATE statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Sequence("UPDATE", "table-name"),

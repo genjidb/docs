@@ -7,9 +7,9 @@ description: >
 
 ## Synopsis
 
-### delete-stmt
+### DELETE statement
 
-```railroad
+```js {.rr}
 Diagram(
   Stack(
     Sequence("DELETE", "FROM", "table-name"),

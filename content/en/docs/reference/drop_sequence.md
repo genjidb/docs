@@ -7,10 +7,15 @@ description: >
 
 ## Synopsis
 
-### drop-sequence-stmt
+### DROP SEQUENCE statement
 
-```railroad
+```js {.rr}
 Diagram(
-  Sequence("DROP", "SEQUENCE", Optional(Sequence("IF", "EXISTS"), "skip"), "sequence-name")
+  Sequence(
+    "DROP",
+    "SEQUENCE",
+    Optional(Sequence("IF", "EXISTS"), "skip"),
+    "sequence-name"
+  )
 );
 ```

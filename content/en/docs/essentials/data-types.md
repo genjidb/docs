@@ -31,7 +31,7 @@ In Genji, _NULL_ is treated as both a value and a type. It represents the absenc
 Whenever Genji needs to manipulate data of different types, depending on the situation it will rely on either:
 
 - **explicit conversion**: The source type and destination type are clearly identified. Ex: When inserting data to field with a constraint or when doing a `CAST`.
-- **implicit conversion**: Two values of different types need to be compared or used by an operator during the evaluation of an [expression]({{< relref "/docs/genji-sql/expressions.md" >}})
+- **implicit conversion**: Two values of different types need to be compared or used by an operator during the evaluation of an [expression]({{< relref "/docs/essentials/expressions.md" >}})
 
 ### Explicit conversion
 
@@ -61,5 +61,5 @@ Here is a table describing type compatibility.
 
 ### Implicit conversion
 
-There is only one kind of implicit conversion: `INTEGER` to `DOUBLE`. This usually takes place during the evaluation of an [expression]({{< relref "/docs/genji-sql/expressions" >}}) involving INTEGER and DOUBLE values.
+There is only one kind of implicit conversion: `INTEGER` to `DOUBLE`. This usually takes place during the evaluation of an [expression]({{< relref "/docs/essentials/expressions" >}}) involving INTEGER and DOUBLE values.
 No other conversion is applied unless it's explicit.
