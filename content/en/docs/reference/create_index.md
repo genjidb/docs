@@ -18,7 +18,16 @@ Diagram(
       Optional("index-name"),
       Sequence("IF", "NOT", "EXISTS", "index-name")
     ),
-    Sequence("ON", "table-name", "(", OneOrMore("field-path", ","), ")")
+    Sequence(
+      "ON",
+      "table-name",
+      "(",
+      OneOrMore(
+        Link("field-path", "/docs/essentials/expressions/#field-path"),
+        ","
+      ),
+      ")"
+    )
   )
 );
 ```

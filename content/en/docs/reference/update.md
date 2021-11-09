@@ -15,10 +15,23 @@ Diagram(
     Sequence("UPDATE", "table-name"),
     Choice(
       0,
-      Sequence("SET", OneOrMore(Sequence("field-path", "=", "expr"), ",")),
+      Sequence(
+        "SET",
+        OneOrMore(
+          Sequence(
+            Link("field-path", "/docs/essentials/expressions/#field-path"),
+            "=",
+            Link("expr", "/docs/essentials/expressions")
+          ),
+          ","
+        )
+      ),
       Sequence("UNSET", OneOrMore("top-level-field", ","))
     ),
-    Optional(Sequence("WHERE", "expr"), "skip")
+    Optional(
+      Sequence("WHERE", Link("expr", "/docs/essentials/expressions")),
+      "skip"
+    )
   )
 );
 ```

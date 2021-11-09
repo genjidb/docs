@@ -13,18 +13,27 @@ description: >
 Diagram(
   Stack(
     Sequence("DELETE", "FROM", "table-name"),
-    Optional(Sequence("WHERE", "expr"), "skip"),
+    Optional(
+      Sequence("WHERE", Link("expr", "/docs/essentials/expressions")),
+      "skip"
+    ),
     Optional(
       Sequence(
         "ORDER",
         "BY",
-        "expr",
+        Link("expr", "/docs/essentials/expressions"),
         Optional(Choice(0, "ASC", "DESC"), "skip")
       ),
       "skip"
     ),
-    Optional(Sequence("LIMIT", "expr"), "skip"),
-    Optional(Sequence("OFFSET", "expr"), "skip")
+    Optional(
+      Sequence("LIMIT", Link("expr", "/docs/essentials/expressions")),
+      "skip"
+    ),
+    Optional(
+      Sequence("OFFSET", Link("expr", "/docs/essentials/expressions")),
+      "skip"
+    )
   )
 );
 ```

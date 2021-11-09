@@ -33,7 +33,7 @@ age >= 18
 1 AND 0
 ```
 
-Here is a list of all supported expressions:
+<p id="expr">Here is a list of all supported expressions:</p>
 
 ```js {.rr}
 Diagram(
@@ -42,36 +42,41 @@ Diagram(
     Link("literal-value"),
     Link("parameter"),
     Link("field-path"),
-    Sequence("NOT", "expr"),
-    Sequence("expr", Link("binary-operator", "#operators"), "expr"),
+    Sequence("NOT", Link("expr")),
+    Sequence(Link("expr"), Link("binary-operator", "#operators"), Link("expr")),
     Sequence(
-      "expr",
+      Link("expr"),
       Optional("NOT"),
       Choice(
         0,
         Link("IN", "#comparison-operators"),
         Link("LIKE", "#comparison-operators")
       ),
-      "expr"
+      Link("expr")
     ),
     Sequence(
-      "expr",
+      Link("expr"),
       Link("IS", "#comparison-operators"),
       Optional("NOT"),
-      "expr"
+      Link("expr")
     ),
     Sequence(
-      "expr",
+      Link("expr"),
       Optional("NOT"),
       Link("BETWEEN", "#comparison-operators"),
-      "expr",
+      Link("expr"),
       "AND",
-      "expr"
+      Link("expr")
     ),
-    Sequence(Link("function", "#functions"), "(", OneOrMore("expr", ","), ")"),
-    Sequence("CAST", "(", "expr", "AS", "type-name", ")"),
+    Sequence(
+      Link("function", "#functions"),
+      "(",
+      OneOrMore(Link("expr"), ","),
+      ")"
+    ),
+    Sequence("CAST", "(", Link("expr"), "AS", "type-name", ")"),
     Sequence("NEXT", "VALUE", "FOR", "sequence-name"),
-    Sequence("(", "expr", ")")
+    Sequence("(", Link("expr"), ")")
   )
 );
 ```
@@ -215,8 +220,8 @@ Boolean literals are evaluated into the [`BOOL`]({{< relref "/docs/essentials/da
 Diagram(
   Choice(
     0,
-    Sequence("[", OneOrMore("expr", ","), "]"),
-    Sequence("(", OneOrMore("expr", ","), ")")
+    Sequence("[", OneOrMore(Link("expr"), ","), "]"),
+    Sequence("(", OneOrMore(Link("expr"), ","), ")")
   )
 );
 ```
@@ -239,7 +244,10 @@ Array literals are evaluated into the [`ARRAY`]({{< relref "/docs/essentials/dat
 ```js {.rr}
 Diagram(
   "{",
-  OneOrMore(Sequence(Choice(0, "identifier", "string"), ":", "expr"), ","),
+  OneOrMore(
+    Sequence(Choice(0, "identifier", "string"), ":", Link("expr")),
+    ","
+  ),
   "}"
 );
 ```
@@ -383,7 +391,7 @@ Diagram(
     "identifier",
     Optional(Sequence(".", "identifier"), "skip"),
     "(",
-    ZeroOrMore("expr", ","),
+    ZeroOrMore(Link("expr"), ","),
     ")"
   )
 );

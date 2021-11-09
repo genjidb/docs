@@ -26,7 +26,7 @@ Diagram(
 
 ```js {.rr}
 Diagram(
-  Sequence("field-path"),
+  Sequence(Link("field-path", "/docs/essentials/expressions/#field-path")),
   OptionalSequence("type-name", OneOrMore(Link("field-constraint")))
 );
 ```
@@ -40,7 +40,14 @@ Diagram(
     Sequence("PRIMARY", "KEY"),
     Sequence("UNIQUE"),
     Sequence("NOT", "NULL"),
-    Sequence("DEFAULT", Choice(0, Sequence("(", "expr", ")"), Sequence("expr")))
+    Sequence(
+      "DEFAULT",
+      Choice(
+        0,
+        Sequence("(", Link("expr", "/docs/essentials/expressions"), ")"),
+        Sequence(Link("expr", "/docs/essentials/expressions"))
+      )
+    )
   )
 );
 ```

@@ -32,21 +32,27 @@ Diagram(
         OneOrMore("field-name", ","),
         ")",
         "VALUES",
-        OneOrMore(Sequence("(", OneOrMore("expr", ","), ")"), ",")
+        OneOrMore(
+          Sequence(
+            "(",
+            OneOrMore(Link("expr", "/docs/essentials/expressions"), ","),
+            ")"
+          ),
+          ","
+        )
       ),
-      Sequence("VALUES", OneOrMore(Link("document-literal"), ","))
+      Sequence(
+        "VALUES",
+        OneOrMore(
+          Link(
+            "document-literal",
+            "/docs/essentials/expressions#document-literal"
+          ),
+          ","
+        )
+      )
     )
   )
-);
-```
-
-### Document literal
-
-```js {.rr}
-Diagram(
-  "{",
-  OneOrMore(Sequence(Choice(0, "identifier", "string"), ":", "expr"), ","),
-  "}"
 );
 ```
 
@@ -72,6 +78,10 @@ Diagram(
 
 ```js {.rr}
 Diagram(
-  Sequence("RETURNING", "expr", Optional(Sequence("AS", "alias"), "skip"))
+  Sequence(
+    "RETURNING",
+    Link("expr", "/docs/essentials/expressions"),
+    Optional(Sequence("AS", "alias"), "skip")
+  )
 );
 ```

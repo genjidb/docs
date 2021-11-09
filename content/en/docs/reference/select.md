@@ -21,8 +21,18 @@ Diagram(
             OneOrMore(Link("result-field"), ",")
           ),
           Optional(Sequence("FROM", Link("table-name")), "skip"),
-          Optional(Sequence("WHERE", "expr"), "skip"),
-          Optional(Sequence("GROUP", "BY", "expr"), "skip")
+          Optional(
+            Sequence("WHERE", Link("expr", "/docs/essentials/expressions")),
+            "skip"
+          ),
+          Optional(
+            Sequence(
+              "GROUP",
+              "BY",
+              Link("expr", "/docs/essentials/expressions")
+            ),
+            "skip"
+          )
         ),
         "select-core"
       ),
@@ -32,13 +42,19 @@ Diagram(
       Sequence(
         "ORDER",
         "BY",
-        "expr",
+        Link("expr", "/docs/essentials/expressions"),
         Optional(Choice(0, "ASC", "DESC"), "skip")
       ),
       "skip"
     ),
-    Optional(Sequence("LIMIT", "expr"), "skip"),
-    Optional(Sequence("OFFSET", "expr"), "skip")
+    Optional(
+      Sequence("LIMIT", Link("expr", "/docs/essentials/expressions")),
+      "skip"
+    ),
+    Optional(
+      Sequence("OFFSET", Link("expr", "/docs/essentials/expressions")),
+      "skip"
+    )
   )
 );
 ```
@@ -49,7 +65,10 @@ Diagram(
 Diagram(
   Choice(
     0,
-    Sequence("expr", Optional(Sequence("AS", "field-alias"), "skip")),
+    Sequence(
+      Link("expr", "/docs/essentials/expressions"),
+      Optional(Sequence("AS", "field-alias"), "skip")
+    ),
     "*"
   )
 );

@@ -47,7 +47,7 @@ The name of the table to be created.
 
 ```js {.rr}
 Diagram(
-  Sequence(Link("field-path", "/docs/essentials/expressions/#field-path")),
+  Link("field-path", "/docs/essentials/expressions/#field-path"),
   OptionalSequence(
     Link("type-name", "/docs/essentials/data-types"),
     OneOrMore(Link("field-constraint"))
@@ -68,7 +68,15 @@ Diagram(
     Sequence("PRIMARY", "KEY"),
     Sequence("UNIQUE"),
     Sequence("NOT", "NULL"),
-    Sequence("DEFAULT", Choice(0, Sequence("(", "expr", ")"), Sequence("expr")))
+    Sequence(
+      "DEFAULT",
+      Choice(
+        0,
+        Sequence("(", Link("expr", "/docs/essentials/expressions"), ")"),
+        Sequence(Link("expr", "/docs/essentials/expressions"))
+      )
+    ),
+    Sequence("CHECK", "(", Link("expr", "/docs/essentials/expressions"), ")")
   )
 );
 ```
@@ -79,8 +87,21 @@ Diagram(
 Diagram(
   Choice(
     0,
-    Sequence("PRIMARY", "KEY", "(", "field-path", ")"),
-    Sequence("UNIQUE", "KEY", "(", "field-path", ")")
+    Sequence(
+      "PRIMARY",
+      "KEY",
+      "(",
+      Link("field-path", "/docs/essentials/expressions/#field-path"),
+      ")"
+    ),
+    Sequence(
+      "UNIQUE",
+      "KEY",
+      "(",
+      Link("field-path", "/docs/essentials/expressions/#field-path"),
+      ")"
+    ),
+    Sequence("CHECK", "(", Link("expr", "/docs/essentials/expressions"), ")")
   )
 );
 ```
