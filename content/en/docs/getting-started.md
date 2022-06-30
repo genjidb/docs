@@ -9,7 +9,7 @@ description: >
 
 ## Prerequisites
 
-Genji requires at least Go 1.16.
+Genji requires at least Go 1.18.
 
 ## Installation
 
@@ -41,22 +41,10 @@ genji
 
 You can then enter your [SQL queries]({{< relref "/getting-started" >}}) directly in the shell.
 
-It is also possible to create an on-disk database, using either [BoltDB](https://github.com/etcd-io/bbolt) or [Badger](https://github.com/dgraph-io/badger).
-
-### On-disk database using BoltDB
-
-Run the `genji` command followed by the name of the database file of your choice.
+It is also possible to create an on-disk database by specifying a directory:
 
 ```bash
-genji my.db
-```
-
-### On-disk database using Badger
-
-Run the following command by replacing `pathToDBDir` by the directory of your choice.
-
-```bash
-genji --badger pathToDBDir
+genji mydb
 ```
 
 ## Next step

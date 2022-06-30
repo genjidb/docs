@@ -14,24 +14,22 @@ It combines the power of **SQL** with the versatility of **documents** to provid
 
 Here is a list of Genji's main features:
 
-- **Optional schemas**: Genji tables are schemaless, but it is possible to add constraints on any field to ensure the coherence of data within a table.
-- **Multiple Storage Engines**: It is possible to store data on disk or in ram, but also to choose between B-Trees and LSM trees. Genji relies on [BoltDB](https://github.com/etcd-io/bbolt) and [Badger](https://github.com/dgraph-io/badger) to manage data.
-- **Transaction support**: Read-only and read/write transactions are supported by default.
-- **SQL and Documents**: Genji mixes the best of both worlds by combining powerful SQL commands with JSON _dot notation_.
-- **Easy to use, easy to learn**: Genji was designed for simplicity in mind. It is really easy to insert and read documents of any shape.
+- **SQL and documents**: Use a powerful SQL language designed for documents as first-class citizen.
+- **Flexible schemas**: Define your table with strict schemas, partial schemas, or no schemas at all.
+- **Transaction support**: Fully serializable transactions with multiple readers and single writer. Readers don't block writers and writers don't block readers.
 
 ## Concepts
 
 Genji's main concepts are not new and semantics have been chosen to match as much as possible what is already existing in other databases:
 
-| Classic SQL databases | Genji             |
-| --------------------- | ----------------- |
-| Table                 | Table             |
-| Row                   | Document          |
-| Column                | Field             |
-| Schema                | Field constraints |
+| Classic SQL databases | Genji    |
+| --------------------- | -------- |
+| Table                 | Table    |
+| Schema                | Schema   |
+| Row                   | Document |
+| Column                | Field    |
 
-- **Table**: A collection of documents. Tables are schemaless by default and support optional
+- **Table**: A collection of documents
+- **Schema**: A list of constraints that apply on all or certain fields of every documents of the table.
 - **Document**: A list of fields
 - **Field**: A key-value pair
-- **Field constraint**: A constraint validated against a field of every inserted or updated document
