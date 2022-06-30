@@ -2,3 +2,5 @@ public/
 resources/
 node_modules/
 
+# Hugo OS lock
+.hugo_build.lock
