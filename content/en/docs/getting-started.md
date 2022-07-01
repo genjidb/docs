@@ -39,7 +39,7 @@ To open an in-memory database, simply type:
 genji
 ```
 
-You can then enter your [SQL queries]({{< relref "/getting-started" >}}) directly in the shell.
+You can then enter your [SQL queries]({{< relref "/docs/essentials/_index.md" >}}) directly in the shell.
 
 It is also possible to create an on-disk database by specifying a directory:
 
