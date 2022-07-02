@@ -83,14 +83,15 @@ Accessing a top-level field can be achieved by simply referring to its name.
 
 _Example_: `name` will evaluate to `"Foo"`.
 
-To access a nested field, concatenate all the fields with the `.` character.
+To access a nested field, either concatenate the fields with the `.` character, or use the `[]` notation
 
-_Examples_: `address.city` will evaluate to `"Lyon"` 
+_Examples_: `address.city` will evaluate to `"Lyon"`
+_Examples_: `address["city"]` will evaluate to `"Lyon"`
 
 To access an element of an array, use the index of the element
 
 _Examples_:
 
-* `friends[0]` will evaluate to `{"name": "Bar","address": {"city":"Paris","zipcode": "75001"}}`
-* `friends[1].name` will evaluate to `"Baz"`
-* `friends[1]."favorite game"` will evaluate to `"ffix"`
+- `friends[0]` will evaluate to `{"name": "Bar","address": {"city":"Paris","zipcode": "75001"}}`
+- `friends[1].name` will evaluate to `"Baz"`
+- `friends[1]."favorite game"` will evaluate to `"FF IX"`
