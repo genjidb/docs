@@ -1,6 +1,6 @@
 ---
 title: "SQL Introduction"
-date: 2020-03-30T20:27:04+04:00
+date: 2022-07-02T10:00:00+08:00
 weight: 10
 description: >
   Introduction to Genji SQL
@@ -641,3 +641,31 @@ DELETE FROM products WHERE sales_count < 1000;
 For every document, the `WHERE` clause evaluates any [expression]({{< relref "/docs/essentials/expressions" >}}) that follows, here `sales_count < 1000`. If the result is truthy, the document gets deleted.
 
 The `DELETE` statement doesn't return an error if no document matches the `WHERE` clause, or if there aren't any document in the table.
+
+## Using indexes
+
+Indexes are created using the `CREATE INDEX` statement.
+
+```sql
+-- create a named index
+CREATE INDEX user_country_idx ON users(country);
+
+-- enforce uniqueness
+CREATE UNIQUE INDEX user_email_idx ON users(email);
+
+-- index name can be ommitted, let the engine generate one for you
+CREATE UNIQUE INDEX ON users(username);
+
+-- it is possible to create indexes on nested fields
+CREATE INDEX ON players(career.us);
+
+-- composite indexes are also supported
+CREATE INDEX ON players(career.us, name);
+
+```
+
+To delete indexes, use the `DROP INDEX` statement
+
+```sql
+DROP INDEX user_email_idx;
+```
