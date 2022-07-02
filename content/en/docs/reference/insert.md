@@ -28,9 +28,7 @@ Diagram(
     Choice(
       0,
       Sequence(
-        "(",
-        OneOrMore("field-name", ","),
-        ")",
+        Optional(Sequence("(", OneOrMore("field-name", ","), ")"), "skip"),
         "VALUES",
         OneOrMore(
           Sequence(
