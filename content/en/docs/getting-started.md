@@ -30,7 +30,7 @@ To try Genji without writing code, you can use the Genji command-line shell.
 First, install it:
 
 ```bash
-go get github.com/genjidb/genji/cmd/genji
+go install github.com/genjidb/genji/cmd/genji@latest
 ```
 
 To open an in-memory database, simply type:
