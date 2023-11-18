@@ -406,6 +406,19 @@ typeof("hello")
 math.atan2(1.1, 1.1)
 ```
 
+### String functions
+
+| Function -> Returns                        | Description                                            |
+| ------------------------------------------ | ------------------------------------------------------ |
+| `strings.LOWER(val: string) -> string`     | Format `val` to lower-case                             |
+| `strings.UPPER(val: string) -> string`     | Format `val` to upper-case                             |
+| `strings.TRIM(val: string) -> string`      | Removes all spaces from each side of `val`             |
+| `strings.TRIM(val: string, trim: string)`  | Removes `trim` characters from each side of `val`      |
+| `strings.LTRIM(val: string) -> string`     | Removes all spaces from the left side of `val`         |
+| `strings.LTRIM(val: sting, trim: string)`  | Removes `trim` characters from the left side of `val`  |
+| `strings.RTRIM(val: string) -> string`     | Removes all spaces from the right side of `val`        |
+| `strings.RTRIM(val: string, trim: string)` | Removes `trim` characters from the right side of `val` |
+
 ## Operators
 
 ```js {.rr}
